@@ -54,29 +54,29 @@ def question_gen(ans_input="x = "):
     expo = random.randint(0, 5)
     base = random.randint(2, 10)
     argument = base ** expo
-    
+
     list.append(expo)
     list.append(base)
     list.append(argument)
 
     unknown = random.choice(list)
-    
+
     if unknown == argument:
         quiz = f"log{base}(x) = {expo}" \
                f"\n{ans_input}"
-        
+
         x = argument
-        
+
     elif unknown == base:
         quiz = f"logx({argument}) = {expo}" \
                f"\n{ans_input}"
-        
+
         x = base
-        
+
     else:
         quiz = f"log{base}({argument}) = x" \
                f"\n{ans_input}"
-        
+
         x = expo
 
     return quiz, x
@@ -84,12 +84,11 @@ def question_gen(ans_input="x = "):
 
 # main routine
 
-quiz_1 = question_gen()
-ans_1 = quiz_1[1]
-print(ans_1)
-ques_1 = int_check(quiz_1[0])
-
 while True:
+
+    quiz_1 = question_gen()
+    ans_1 = quiz_1[1]
+    ques_1 = int_check(quiz_1[0])
 
     if ques_1 == ans_1:
         print("Correct")

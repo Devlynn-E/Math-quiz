@@ -101,7 +101,7 @@ def yes_no(question):
 default_params = yes_no("\nDo you want to use the default log parameters? ")
 if default_params == "no":
     base_input = int_check("\nmax base? ", low=2)
-    expo_input = int_check("\nmax exponent? ", low=0)
+    expo_input = int_check("\nmax exponent? ", low=1)
     print()
 
 else:

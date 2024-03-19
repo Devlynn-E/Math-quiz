@@ -1,10 +1,12 @@
 import random
 
+
 import math
 
 
 # checks that a number is an integer
 def int_check(question, low=None, high=None, exit_code=None):
+
     # if any int is allowed
     if low is None and high is None:
         error = "Please enter an integer"
@@ -61,19 +63,19 @@ def question_gen(ans_input="x = ", max_base=10, max_expo=5):
     unknown = random.choice(list)
 
     if unknown == argument:
-        quiz = f"log{base} (x) = {expo}" \
+        quiz = f"log{base}(x) = {expo}" \
                f"\n{ans_input}"
 
         x = argument
 
     elif unknown == base:
-        quiz = f"logx ({argument}) = {expo}" \
+        quiz = f"logx({argument}) = {expo}" \
                f"\n{ans_input}"
 
         x = base
 
     else:
-        quiz = f"log{base} ({argument}) = x" \
+        quiz = f"log{base}({argument}) = x" \
                f"\n{ans_input}"
 
         x = expo
@@ -108,6 +110,8 @@ def instructions():
         
         🎂🎂🎂Good Luck🎂🎂🎂
 
+        🎂🎂🎂Good Luck🎂🎂🎂
+
             ''')
 
 
@@ -127,14 +131,12 @@ def yes_no(question):
 
 # main routine
 
-# set variables and lists
-
 mode = "regular"
 rounds_played = 0
 end_game = "no"
 
-history = []
-
+ans_his = []
+response_his = []
 
 print("\n📈📈📈 Math Quiz (Logs) 📉📉📉")
 print()
@@ -146,7 +148,6 @@ if wants_instructions == "yes":
     # displays instructions
     instructions()
 
-# asks for the amount of questions the user wants to play (with option for infinite)
 num_rounds = int_check("\nHow many questions? <enter for infinite>: ", low=1, exit_code="")
 
 if num_rounds == "":
@@ -162,7 +163,7 @@ default_params = yes_no("\nDo you want to use the default log parameters? ")
 if default_params == "no":
     # asks for the max base and exponent for the questions
     base_input = int_check("\nmax base? ", low=2)
-    expo_input = int_check("\nmax exponent? ", low=2)
+    expo_input = int_check("\nmax exponent? ", low=1)
     print()
 
 else:
@@ -177,7 +178,6 @@ while rounds_played < rounds_to_play:
     # round heading
     if mode == "infinite":
         heading = f"\n♾♾♾ Question {rounds_played + 1} (infinite mode) ♾♾♾"
-        rounds_to_play += 1
 
     else:
         heading = f"\n📊📊📊 Question {rounds_played + 1} of {rounds_to_play} 📊📊📊"
@@ -194,18 +194,7 @@ while rounds_played < rounds_to_play:
     elif ques_1 == ans_1:
         print("Correct")
 
-        ans = f"Question {rounds_played + 1}: Correct!" \
-              f"\nQuestion: {quiz_1[0]} \t" \
-              f"answer: {ans_1}."
-
     else:
         print("wrong")
-
-        ans = f"Question {rounds_played + 1}: Wrong" \
-              f"\nQuestion: {quiz_1[0]} \t" \
-              f"answer: {ans_1} \t" \
-              f"given answer: {ques_1}."
-
-    history.append(ans)
 
     rounds_played += 1

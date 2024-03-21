@@ -1,7 +1,5 @@
 import random
 
-import math
-
 
 # checks that a number is an integer
 def int_check(question, low=None, high=None, exit_code=None):
@@ -48,18 +46,22 @@ def int_check(question, low=None, high=None, exit_code=None):
 
 # generates a random logarithm question
 def question_gen(ans_input="x = ", max_base=10, max_expo=5):
-    list = []
+    list_1 = []
 
+    # generates random integers
     expo = random.randint(1, max_expo)
     base = random.randint(2, max_base)
     argument = base ** expo
 
-    list.append(expo)
-    list.append(base)
-    list.append(argument)
+    # append integers
+    list_1.append(expo)
+    list_1.append(base)
+    list_1.append(argument)
 
-    unknown = random.choice(list)
+    # choose a random integer from that list_1 to become the answer
+    unknown = random.choice(list_1)
 
+    # generate personalised question for the unknown variable
     if unknown == argument:
         quiz = f"log{base} (x) = {expo}" \
                f"\n{ans_input}"
@@ -81,36 +83,38 @@ def question_gen(ans_input="x = ", max_base=10, max_expo=5):
     return quiz, x
 
 
+# prints the instructions
 def instructions():
     print('''
 
         **** instructions ****
 
         This is a quiz based on logarithms
-        
+
         How logs work:
-        
+
         There are three parts of a log; base, exponent and argument
-        
+
         -   base is the number that has an exponent on it such as A in: A^b = c
         -   exponent is the power of the base such as b in: A^b = c
         -   argument is what the base to power of the exponent is equal to, such as c in: A^b = c
-        
+
         All of this can be written in log form. This is what is looks like in log form: logA (c) = b
-        
-        
+
+
         The default parameters of this game are: max base = 10, max exponent = 5
-        
+
         You can edit these by not choosing to use the default parameters, however i wouldn't go too high.
         Otherwise your questions might get a little difficult.
-        
+
         I would only recommend going to a max base of 12 and maybe a max exponent of 6 if your up to it.
-        
+
         🎂🎂🎂Good Luck🎂🎂🎂
 
             ''')
 
 
+# checks for a yes / no response to a question
 def yes_no(question):
     # starts loop
     while True:
@@ -128,13 +132,14 @@ def yes_no(question):
 # main routine
 
 # set variables and lists
-
 mode = "regular"
 rounds_played = 0
 end_game = "no"
+correct_ans = 0
+wrong_ans = 0
 
 history = []
-
+stats = []
 
 print("\n📈📈📈 Math Quiz (Logs) 📉📉📉")
 print()
@@ -184,28 +189,69 @@ while rounds_played < rounds_to_play:
 
     print(heading)
 
+    # uses the questions_gen() def to generate a random question within given params
     quiz_1 = question_gen("x = ", base_input, expo_input)
+
+    # uses the second return to get the correct answer
     ans_1 = quiz_1[1]
+
+    # gets input from the user
     ques_1 = int_check(quiz_1[0], None, None, "x")
 
     if ques_1 == "x":
+        # if the user input the exit code we break from the rest of the code
         break
 
     elif ques_1 == ans_1:
         print("Correct")
 
+        # makes a variable for the history list
         ans = f"Question {rounds_played + 1}: Correct!" \
-              f"\nQuestion: {quiz_1[0]} \t" \
-              f"answer: {ans_1}."
+              f"\nQuestion: {quiz_1[0]} " \
+              f"{ans_1}"
+
+        correct_ans += 1
 
     else:
         print("wrong")
 
+        # different print for a different result
         ans = f"Question {rounds_played + 1}: Wrong" \
-              f"\nQuestion: {quiz_1[0]} \t" \
-              f"answer: {ans_1} \t" \
-              f"given answer: {ques_1}."
+              f"\nQuestion: {quiz_1[0]} " \
+              f"{ans_1} \t" \
+              f"given answer: {ques_1}"
 
+        wrong_ans += 1
+
+    # append the ans variable
     history.append(ans)
 
     rounds_played += 1
+
+if rounds_played > 0:
+    # get win / loss percents
+    win_percent = correct_ans / rounds_played * 100
+    loss_percent = 100 - win_percent
+
+    # Output Game Stats (to 0 dp)
+    print("\n📊📊📊 Quiz Results 📊📊📊")
+    print(f"✔ Correct: {win_percent:.0f}% \t "
+          f"❌Incorrect: {loss_percent:.0f}% \t "
+          f"Mark: ({correct_ans} / {rounds_played})")
+
+    # asks if the user wants to see the history
+    see_history = yes_no("Do You want to see your answers? ")
+
+    if see_history == "yes":
+        # prints all appended results
+        for item in history:
+            print()
+            print(item)
+
+    else:
+        print()
+
+    print("\nThanks for playing!")
+
+else:
+    print("\nYou didn't answer any of my questions.")

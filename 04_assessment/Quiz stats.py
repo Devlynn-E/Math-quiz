@@ -239,15 +239,17 @@ if rounds_played > 0:
     win_percent = correct_ans / rounds_played * 100
     loss_percent = 100 - win_percent
 
-    # Output Game Stats
+    # Output Game Stats (to 0 dp)
     print("\n📊📊📊 Quiz Results 📊📊📊")
     print(f"✔ Correct: {win_percent:.0f}% \t "
           f"❌Incorrect: {loss_percent:.0f}% \t "
           f"Mark: ({correct_ans} / {rounds_played})")
 
+    # asks if the user wants to see the history
     see_history = yes_no("Do You want to see your answers? ")
 
     if see_history == "yes":
+        # prints all appended results
         for item in history:
             print()
             print(item)

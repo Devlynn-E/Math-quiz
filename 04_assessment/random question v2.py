@@ -14,7 +14,7 @@ def int_check(question, low=None, high=None, exit_code=None):
     # if the number needs to be more than an
     # integer (ie: rounds / 'high number')
     elif low is not None and high is None:
-        error = (f"Please enter an integer that is"
+        error = (f"Please enter an integer that is "
                  f"more than / equal to {low}")
 
     # if the number needs to be between low and high
@@ -101,7 +101,7 @@ def yes_no(question):
 default_params = yes_no("\nDo you want to use the default log parameters? ")
 if default_params == "no":
     base_input = int_check("\nmax base? ", low=2)
-    expo_input = int_check("\nmax exponent? ", low=1)
+    expo_input = int_check("\nmax exponent? ", low=2)
     print()
 
 else:

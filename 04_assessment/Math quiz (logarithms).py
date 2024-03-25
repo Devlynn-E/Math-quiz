@@ -171,6 +171,7 @@ if default_params == "no":
     print()
 
 else:
+    # defines the default parameters
     print("\nHighest Base number: 10 | Highest Exponent: 5")
     print()
     base_input = 10
@@ -179,7 +180,7 @@ else:
 # game loop starts
 while rounds_played < rounds_to_play:
 
-    # round heading
+    # round heading (personalized for round type)
     if mode == "infinite":
         heading = f"\n♾♾♾ Question {rounds_played + 1} (infinite mode) ♾♾♾"
         rounds_to_play += 1
@@ -228,6 +229,7 @@ while rounds_played < rounds_to_play:
 
     rounds_played += 1
 
+# makes sure that the user answered more than one question
 if rounds_played > 0:
     # get win / loss percents
     win_percent = correct_ans / rounds_played * 100

@@ -53,33 +53,38 @@ def question_gen(ans_input="x = ", max_base=10, max_expo=5):
     base = random.randint(2, max_base)
     argument = base ** expo
 
-    # append integers
+    # append integers to a list
     list_1.append(expo)
     list_1.append(base)
     list_1.append(argument)
 
-    # choose a random integer from that list_1 to become the answer
+    # choose a random integer from that list to become the answer
     unknown = random.choice(list_1)
 
     # generate personalised question for the unknown variable
+
     if unknown == argument:
+        # fill in the known variables and make the argument have (x) instead of its value
         quiz = f"log{base} (x) = {expo}" \
                f"\n{ans_input}"
 
         x = argument
 
     elif unknown == base:
+        # make the base be the unknown by revealing the argument and exponent and making the base x
         quiz = f"logx ({argument}) = {expo}" \
                f"\n{ans_input}"
 
         x = base
 
     else:
+        # finally, if the exponent was chosen for the answer, have the exponent show as an x instead
         quiz = f"log{base} ({argument}) = x" \
                f"\n{ans_input}"
 
         x = expo
 
+    # return the question type and the answer
     return quiz, x
 
 
@@ -87,7 +92,7 @@ def question_gen(ans_input="x = ", max_base=10, max_expo=5):
 def instructions():
     print('''
 
-        **** instructions ****
+        **** Instructions ****
 
         This is a quiz based on logarithms
 
@@ -99,15 +104,17 @@ def instructions():
         -   exponent is the power of the base such as b in: A^b = c
         -   argument is what the base to power of the exponent is equal to, such as c in: A^b = c
 
-        All of this can be written in log form. This is what is looks like in log form: logA (c) = b
+        All of this can be written in log form. This is what it looks like in log form: logA (c) = b
 
 
         The default parameters of this game are: max base = 10, max exponent = 5
 
-        You can edit these by not choosing to use the default parameters, however i wouldn't go too high.
+        You can edit these by not choosing to use the default parameters, however I wouldn't go too high.
         Otherwise your questions might get a little difficult.
 
-        I would only recommend going to a max base of 12 and maybe a max exponent of 6 if your up to it.
+        I would only recommend going to a max base of 12 and maybe a max exponent of 6 if you're up to it.
+        
+        You can quit anytime you feel like by typing "x" when given the prompt for an answer.
 
         🎂🎂🎂Good Luck🎂🎂🎂
 
@@ -131,19 +138,20 @@ def yes_no(question):
 
 # main routine
 
-# set variables and lists
+# set variables and lists that will change depending on game outcome
 mode = "regular"
 rounds_played = 0
 end_game = "no"
 correct_ans = 0
 wrong_ans = 0
-
 history = []
 stats = []
 
+# prints the title of the quiz
 print("\n📈📈📈 Math Quiz (Logs) 📉📉📉")
 print()
 
+# start of inputs
 # instructions
 wants_instructions = yes_no("Do you want to view the instructions? ")
 
@@ -214,7 +222,7 @@ while rounds_played < rounds_to_play:
         correct_ans += 1
 
     else:
-        print("wrong")
+        print(f"wrong, the correct answer was: {ans_1}")
 
         # different print for a different result
         ans = f"Question {rounds_played + 1}: Wrong" \
@@ -256,4 +264,5 @@ if rounds_played > 0:
     print("\nThanks for playing!")
 
 else:
-    print("\nYou didn't answer any of my questions.")
+    # if they don't answer any questions, act sad :(
+    print("\nYou didn't answer any of my questions. :(")
